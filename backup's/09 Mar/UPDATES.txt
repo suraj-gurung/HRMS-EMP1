@@ -1,0 +1,3 @@
+1. AJAX CALL with G2 code
+2. DispatchAction
+3. 

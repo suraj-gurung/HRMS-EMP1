@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+
+<struts-config>
+    <form-beans>
+        <form-bean name="EmployeeForm" type="com.hrms.form.EmployeeForm" ></form-bean>
+        <form-bean name="DeactivateEmpForm" type="com.hrms.form.DeactivateEmpForm"/>
+        <form-bean name="UpdateAddressFormBean" type="com.hrms.beans.UpdateAddressFormBean"/>
+    </form-beans>
+    
+    <global-exceptions>
+         
+    </global-exceptions>
+
+    <global-forwards>
+        <forward name="welcome"  path="/Welcome.do"/>
+    </global-forwards>
+
+    <action-mappings>
+         
+        <action path="/loginprocess" name="EmployeeForm" input="/jsp/login.jsp" type="com.hrms.action.EmployeeAction" scope="request" >
+            <forward name="success" path="/jsp/employee/details.jsp" />
+            <forward name="fail" path="/jsp/login/login.jsp" />
+        </action>
+        
+        <action input="/EmployeeDetails" name="EmployeeForm" path="/EmployeeDetails" scope="request" type="com.hrms.action.EmployeeDetails"/>
+        
+        <action path="/editEmployee" name="EmployeeUpdateBean" type="com.hrms.action.EmployeeUpdateAction" >
+            <forward name="update" path="/jsp/employee/editDetails.jsp" />
+        </action>
+        
+        <action path="/allEmployee" input="/jsp/login/error.jsp" scope="request" type="com.hrms.action.AllEmployeeAction"> 
+            <forward name="allEmployee" path="/jsp/employee/allEmployee.jsp" />
+        </action>
+        <action path="/showAddress" type="com.hrms.action.ShowAddressAction">
+            <forward name="gotAddress" path="/jsp/employee/showAddress.jsp" />
+        </action>
+        <action path="/updateAddress" name="UpdateAddressFormBean" parameter="actionId" scope="request" type="com.hrms.action.UpdateAddressAction">
+            <forward name="getAddress" path="/jsp/employee/updateAddress.jsp" />
+            <forward name="showAddress" path="/jsp/employee/updateAddress.jsp" />
+            <forward name="updated" path="/jsp/employee/addressUpdated.jsp" />
+        </action>
+        
+        <action path="/deActivateEmp" name="DeactivateEmpForm" parameter="actionId" scope="request" type="com.hrms.action.UpdateAddressAction" validate="false">
+            <forward name="deactivated" path="/jsp/employee/allEmployee.jsp" />
+        </action>
+    </action-mappings>
+    
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+
+    <message-resources parameter="com/myapp/struts/ApplicationResource"/>    
+    
+    <!-- ========================= Tiles plugin ===============================-->
+    <!--
+    This plugin initialize Tiles definition factory. This later can takes some
+    parameters explained here after. The plugin first read parameters from
+    web.xml, thenoverload them with parameters defined here. All parameters
+    are optional.
+    The plugin should be declared in each struts-config file.
+    - definitions-config: (optional)
+    Specify configuration file names. There can be several comma
+    separated file names (default: ?? )
+    - moduleAware: (optional - struts1.1)
+    Specify if the Tiles definition factory is module aware. If true
+    (default), there will be one factory for each Struts module.
+    If false, there will be one common factory for all module. In this
+    later case, it is still needed to declare one plugin per module.
+    The factory will be initialized with parameters found in the first
+    initialized plugin (generally the one associated with the default
+    module).
+    true : One factory per module. (default)
+    false : one single shared factory for all modules
+    - definitions-parser-validate: (optional)
+    Specify if xml parser should validate the Tiles configuration file.
+    true : validate. DTD should be specified in file header (default)
+    false : no validation
+
+    Paths found in Tiles definitions are relative to the main context.
+    -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />      
+        <set-property property="moduleAware" value="true" />
+    </plug-in>
+    
+    <!-- ========================= Validator plugin ================================= -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+  
+</struts-config>

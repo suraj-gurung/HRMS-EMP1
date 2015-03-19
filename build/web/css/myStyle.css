@@ -1,0 +1,20 @@
+/* 
+    Document   : myStyle
+    Created on : Feb 25, 2015, 9:02:10 PM
+    Author     : srj
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+#red{
+    
+    color:red;
+}
+
+#green{
+    color: green;
+}

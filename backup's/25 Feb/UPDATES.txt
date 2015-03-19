@@ -1,0 +1,6 @@
+UPDATES
+
+1. logger
+2. debugger
+3. validate method -- just validate there is error or not.
+    and we can validate = true/false in struts-config.xml file
