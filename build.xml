@@ -32,7 +32,7 @@
       -pre-run-deploy:           called before deploying
       -post-run-deploy:          called after deploying
 
-    Example of pluging an obfuscator after the compilation could look like 
+    Example of pluging an obfuscator after the compilation could look like  
 
         <target name="-post-compile">
             <obfuscate>
